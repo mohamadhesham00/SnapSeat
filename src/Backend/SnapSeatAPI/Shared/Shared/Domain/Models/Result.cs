@@ -1,4 +1,4 @@
-﻿namespace Shared.Results
+﻿namespace Shared.Domain.Models
 {
     using System.Net;
 
