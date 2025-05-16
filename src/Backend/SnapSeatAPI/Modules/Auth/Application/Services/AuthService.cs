@@ -3,7 +3,7 @@ using Auth.Application.Interfaces;
 using Auth.Domain.Entities;
 using Auth.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Shared.Results;
+using Shared.Domain.Models;
 
 namespace Auth.Application.Services
 {

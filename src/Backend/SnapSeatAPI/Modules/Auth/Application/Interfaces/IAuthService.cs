@@ -1,5 +1,5 @@
 ﻿using Auth.Application.DTOs;
-using Shared.Results;
+using Shared.Domain.Models;
 
 namespace Auth.Application.Interfaces
 {

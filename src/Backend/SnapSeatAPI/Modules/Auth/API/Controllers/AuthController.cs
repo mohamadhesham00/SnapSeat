@@ -1,12 +1,13 @@
 ﻿using Auth.Application.DTOs;
 using Auth.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Shared.API.Controllers;
 
 namespace Auth.API.Controllers
 {
     [ApiController]
-    [Route("api/auth")]
-    public class AuthController : ControllerBase
+    [Route("api/[controller]")]
+    public class AuthController : BaseController
     {
 
         private readonly IAuthService _authService;
@@ -20,11 +21,8 @@ namespace Auth.API.Controllers
         public async Task<IActionResult> Register(RegisterRequest request)
         {
             var result = await _authService.RegisterAsync(request);
-            if (!result.IsSuccess)
-            {
-                return StatusCode((int)result.StatusCode, new { error = result.Error });
-            }
-            return StatusCode((int)result.StatusCode, result.Value);
+            return this.HandleResult(result);
+
 
         }
 
@@ -32,22 +30,16 @@ namespace Auth.API.Controllers
         public async Task<IActionResult> Login(LoginRequest request)
         {
             var result = await _authService.LoginAsync(request);
-            if (!result.IsSuccess)
-            {
-                return StatusCode((int)result.StatusCode, new { error = result.Error });
-            }
-            return StatusCode((int)result.StatusCode, result.Value);
+            return this.HandleResult(result);
+
         }
 
         [HttpPost("refresh")]
         public async Task<IActionResult> Refresh(RefreshTokenRequest request)
         {
             var result = await _authService.RefreshAsync(request);
-            if (!result.IsSuccess)
-            {
-                return StatusCode((int)result.StatusCode, new { error = result.Error });
-            }
-            return StatusCode((int)result.StatusCode, result.Value);
+            return this.HandleResult(result);
+
         }
     }
 }
