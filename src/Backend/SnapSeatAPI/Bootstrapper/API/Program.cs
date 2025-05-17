@@ -1,4 +1,5 @@
 using Auth.DependencyInjection;
+using BookingAPI.DependencyInjection;
 using EventManagement.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Shared.Infrastructure.Middleware;
@@ -9,7 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services
     .AddAuthModule(builder.Configuration)
-    .AddEventModule(builder.Configuration);
+    .AddEventModule(builder.Configuration)
+    .AddBookingModule(builder.Configuration);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
