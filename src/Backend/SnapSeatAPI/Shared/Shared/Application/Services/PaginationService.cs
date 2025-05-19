@@ -12,8 +12,8 @@ namespace Shared.Application.Services
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
-            var pageSize = paginationRequest.PageSize;
-            var page = paginationRequest.Page;
+            var pageSize = paginationRequest.PageSize == 0 ? 10 : paginationRequest.PageSize;
+            var page = paginationRequest.Page == 0 ? 1 : paginationRequest.Page;
 
             var totalItems = query.Count();
             var totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
