@@ -22,7 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Modules\EventManagement\EventManagement.csproj" />
     <ProjectReference Include="..\..\Modules\Auth\Auth.csproj" />
-    <ProjectReference Include="..\..\Modules\BookingAPI\BookingAPI.csproj" />
     <ProjectReference Include="..\..\Shared\Shared\Shared.csproj" />
   </ItemGroup>
 
