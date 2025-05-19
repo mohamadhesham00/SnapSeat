@@ -16,7 +16,8 @@ namespace Shared.Infrastructure
             _dbSet = db.Set<TEntity>();
         }
 
-        public virtual async Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        public virtual async Task<TEntity?> GetByIdAsync(Guid id
+            , CancellationToken cancellationToken = default)
         {
             return await _dbSet.FindAsync(id, cancellationToken);
         }
@@ -26,7 +27,8 @@ namespace Shared.Infrastructure
             return _dbSet;
         }
 
-        public async Task AddAsync(TEntity entity, CancellationToken cancellationToken)
+        public async Task AddAsync(TEntity entity
+            , CancellationToken cancellationToken = default)
         {
             await _dbSet.AddAsync(entity, cancellationToken);
         }
@@ -41,7 +43,7 @@ namespace Shared.Infrastructure
             _dbSet.Remove(entity);
         }
 
-        public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken)
+        public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             return await _db.SaveChangesAsync(cancellationToken) > 0;
         }
