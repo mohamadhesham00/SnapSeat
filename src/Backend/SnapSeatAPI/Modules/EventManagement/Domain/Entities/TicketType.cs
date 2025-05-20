@@ -13,6 +13,7 @@ namespace EventManagement.Domain.Entities
 
         public Guid EventId { get; set; }
         public Event Event { get; set; }
+        public List<Booking> Bookings { get; set; }
         public TicketType(string name, int capacity, decimal price, Guid eventId)
         {
             Name = name;

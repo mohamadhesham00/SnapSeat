@@ -9,6 +9,7 @@ namespace EventManagement.Infrastructure.Persistence
         public DbSet<EventCategory> EventCategories { get; set; }
         public DbSet<EventTag> EventTags { get; set; }
         public DbSet<TicketType> TicketTypes { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
         public EventDBContext(DbContextOptions options) : base(options)
         {
         }

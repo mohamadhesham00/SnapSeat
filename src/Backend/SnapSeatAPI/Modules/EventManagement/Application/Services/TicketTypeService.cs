@@ -75,6 +75,32 @@ namespace EventManagement.Application.Services
 
         }
 
+        public async Task<Result<string>> HandleBooking(CurrentUser currentUser, Guid id, int seats)
+        {
+            var ticketType = await _repo.GetByIdAsync(id);
+            if (ticketType is null)
+            {
+                return Result<string>.Failure(
+                    "We could not find this type of ticket, make sure you " +
+                    "sent the right data"
+                    , System.Net.HttpStatusCode.NotFound);
+            }
+            if (ticketType.SeatsLeft < seats)
+            {
+
+                return Result<string>.Failure(
+                    "Unfortunately, there are not enough available seats to " +
+                    "complete your booking."
+                    , System.Net.HttpStatusCode.Conflict);
+            }
+            ticketType.SeatsBooked += seats;
+            ticketType.UpdatedAt = DateTime.UtcNow;
+            ticketType.UpdatedBy = currentUser.UserId;
+            _repo.Update(ticketType);
+            return Result<string>.Success("Successfully updated ticket");
+        }
+
+
         public async Task<Result<bool>> DeleteAsync(CurrentUser currentUser, Guid id, CancellationToken cancellationToken = default)
         {
             var ticketType = await _repo.GetByIdAsync(id, cancellationToken);

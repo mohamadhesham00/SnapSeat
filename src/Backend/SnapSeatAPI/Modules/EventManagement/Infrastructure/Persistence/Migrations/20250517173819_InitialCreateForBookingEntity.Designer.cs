@@ -3,6 +3,7 @@ using System;
 using EventManagement.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EventManagement.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(EventDBContext))]
-    partial class EventDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250517173819_InitialCreateForBookingEntity")]
+    partial class InitialCreateForBookingEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,8 +54,6 @@ namespace EventManagement.Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TicketTypeId");
 
                     b.ToTable("Bookings", "Event");
                 });
@@ -209,15 +210,6 @@ namespace EventManagement.Infrastructure.Persistence.Migrations
                     b.ToTable("TicketTypes", "Event");
                 });
 
-            modelBuilder.Entity("EventManagement.Domain.Entities.Booking", b =>
-                {
-                    b.HasOne("EventManagement.Domain.Entities.TicketType", null)
-                        .WithMany("Bookings")
-                        .HasForeignKey("TicketTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("EventManagement.Domain.Entities.Event", b =>
                 {
                     b.HasOne("EventManagement.Domain.Entities.EventCategory", "EventCategory")
@@ -252,11 +244,6 @@ namespace EventManagement.Infrastructure.Persistence.Migrations
                     b.Navigation("Tags");
 
                     b.Navigation("TicketTypes");
-                });
-
-            modelBuilder.Entity("EventManagement.Domain.Entities.TicketType", b =>
-                {
-                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }

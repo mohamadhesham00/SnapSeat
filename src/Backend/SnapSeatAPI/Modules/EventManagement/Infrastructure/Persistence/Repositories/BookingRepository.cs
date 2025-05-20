@@ -4,11 +4,11 @@ using Shared.Infrastructure;
 
 namespace EventManagement.Infrastructure.Persistence.Repositories
 {
-    public class EventCategoryRepository : Repository<EventCategory, EventDBContext>, IEventCategoryRepository
+    public class BookingRepository : Repository<Booking, EventDBContext>
+        , IBookingRepository
     {
-
-        public EventCategoryRepository(EventDBContext db) : base(db) { }
-
-
+        public BookingRepository(EventDBContext db) : base(db)
+        {
+        }
     }
 }

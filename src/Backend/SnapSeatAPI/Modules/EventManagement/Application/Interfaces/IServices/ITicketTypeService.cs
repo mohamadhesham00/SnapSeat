@@ -12,6 +12,8 @@ namespace EventManagement.Application.Interfaces.IServices
 
         public Task<Result<GetTicketTypeDTO>> UpdateAsync(CurrentUser currentUser, Guid id, PutTicketTypeDTO dto, CancellationToken cancellationToken = default);
 
+        public Task<Result<string>> HandleBooking(CurrentUser currentUser, Guid id
+            , int seats);
         public Task<Result<bool>> DeleteAsync(CurrentUser currentUser, Guid id, CancellationToken cancellationToken = default);
     }
 }
