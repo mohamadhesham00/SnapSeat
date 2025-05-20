@@ -1,7 +1,8 @@
+using API.Configs;
 using Auth.DependencyInjection;
-using BookingAPI.DependencyInjection;
 using EventManagement.DependencyInjection;
-using Microsoft.OpenApi.Models;
+using KafkaFlow;
+using Shared.DependencyInjection;
 using Shared.Infrastructure.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,12 +59,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseMiddleware<CurrentUserMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();
+await app.Services.CreateKafkaBus().StartAsync();
 
 app.Run();
