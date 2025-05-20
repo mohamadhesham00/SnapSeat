@@ -46,13 +46,15 @@ namespace EventManagement.Application.Services
 
         public async Task<Result<GetEventDTO>> CreateAsync(CurrentUser currentUser, EventDTO dto, CancellationToken cancellationToken = default)
         {
-            var eventCategoryExists = await _eventCategoryRepository.Exists(dto.EventCategoryId);
-            if (!eventCategoryExists)
+            var eventCategory = await _eventCategoryRepository.GetByIdAsync
+                (dto.EventCategoryId, cancellationToken);
+            if (eventCategory is null)
             {
                 return Result<GetEventDTO>.Failure("Cannot find event with this id"
                     , System.Net.HttpStatusCode.NotFound);
             }
             var _event = dto.ToEntity();
+            _event.EventCategory = eventCategory;
             _event.CreatedBy = currentUser.UserId;
             if (dto.Image != null)
             {

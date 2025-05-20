@@ -28,8 +28,8 @@ namespace EventManagement.Application.Services
 
         public async Task<Result<GetTicketTypeDTO>> CreateAsync(CurrentUser currentUser, TicketTypeDTO dto, CancellationToken cancellationToken = default)
         {
-            var isEventExists = await _eventRepository.Exists(dto.EventId);
-            if (!isEventExists)
+            var _event = await _eventRepository.GetByIdAsync(dto.EventId);
+            if (_event is null)
             {
                 return Result<GetTicketTypeDTO>.Failure("Cannot find event with this id", System.Net.HttpStatusCode.NotFound);
             }

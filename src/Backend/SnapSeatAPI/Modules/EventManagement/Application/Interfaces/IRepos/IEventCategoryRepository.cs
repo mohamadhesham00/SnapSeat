@@ -5,6 +5,5 @@ namespace EventManagement.Application.Interfaces.IRepos
 {
     public interface IEventCategoryRepository : IRepository<EventCategory>
     {
-        public Task<bool> Exists(Guid id);
     }
 }

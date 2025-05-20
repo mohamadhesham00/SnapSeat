@@ -25,9 +25,5 @@ namespace EventManagement.Infrastructure.Persistence.Repositories
                 .Include(e => e.Tags)
                 .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
         }
-        public async Task<bool> Exists(Guid id)
-        {
-            return await _dbSet.AnyAsync(e => e.Id == id);
-        }
     }
 }
