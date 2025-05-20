@@ -1,6 +1,6 @@
 ﻿namespace Shared.Domain.Models
 {
-    public record CurrentUser
+    public class CurrentUser
     {
         public Guid UserId { get; set; }
         public string Email { get; set; }
@@ -12,6 +12,10 @@
         public bool HasRole(string role)
         {
             return Role == role;
+        }
+        public CurrentUser()
+        {
+
         }
         public CurrentUser(bool isAuthenticated)
         {
